@@ -434,6 +434,7 @@ function App() {
       fetchGraphData();
 
     };
+  void deleteSingle;
 
   // =========================
   // MULTI DELETE

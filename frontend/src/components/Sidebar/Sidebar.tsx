@@ -64,7 +64,7 @@ export const Sidebar: React.FC = () => {
           <NavLink
             key={item.name}
             to={item.path}
-            className={({ isActive }) =>
+            className={({ isActive }: { isActive: boolean }) =>
               `flex items-center gap-3.5 px-4 py-3 rounded-xl text-sm font-medium transition-all group relative overflow-hidden ${
                 isActive
                   ? "bg-brand-primary/10 text-brand-primary border border-brand-primary/20 shadow-glow-primary/5 font-semibold"
@@ -72,7 +72,7 @@ export const Sidebar: React.FC = () => {
               }`
             }
           >
-            {({ isActive }) => (
+            {({ isActive }: { isActive: boolean }) => (
               <>
                 <item.icon className={`w-5 h-5 flex-shrink-0 transition-colors ${isActive ? "text-brand-primary" : "text-slate-400 group-hover:text-slate-200"}`} />
                 {!sidebarCollapsed && (

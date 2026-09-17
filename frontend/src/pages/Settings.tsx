@@ -11,6 +11,7 @@ import {
   Check,
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
+import { API_BASE_URL } from "../services/api";
 
 export const Settings: React.FC = () => {
   const { accentColor, setAccentColor } = useTheme();
@@ -136,7 +137,7 @@ export const Settings: React.FC = () => {
             <div className="space-y-3 pt-2 text-xs">
               <div className="flex justify-between items-center">
                 <span className="text-slate-400">Backend Port Configuration</span>
-                <span className="text-slate-200 font-mono">http://127.0.0.1:8000</span>
+                <span className="text-slate-200 font-mono break-all">{API_BASE_URL}</span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-slate-400">API Connection Integrity</span>

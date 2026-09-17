@@ -116,7 +116,7 @@ export const Dashboard: React.FC = () => {
           <div>
             <h2 className="text-xl font-bold text-white tracking-wide">SYSTEM OFFLINE</h2>
             <p className="text-sm text-slate-400 mt-2 leading-relaxed">
-              Unable to establish secure communication with PlateVision AI backend service. Verify that the FastAPI server is running on <span className="font-mono text-slate-300">port 8000</span>.
+              Unable to establish secure communication with PlateVision AI backend service. Please check your network connection or verify that the backend service is running.
             </p>
           </div>
           <button

@@ -5,6 +5,7 @@ import {
 } from "react";
 
 import axios from "axios";
+import { API_BASE_URL, getImageUrl } from "./services/api";
 
 import {
   LayoutDashboard,
@@ -95,7 +96,7 @@ function App() {
 
       const response =
         await axios.get(
-          "http://127.0.0.1:8000/history"
+          `${API_BASE_URL}/history`
         );
 
       setHistory(response.data);
@@ -118,7 +119,7 @@ function App() {
 
       const response =
         await axios.get(
-          "http://127.0.0.1:8000/dashboard"
+          `${API_BASE_URL}/dashboard`
         );
 
       setDashboard(response.data);
@@ -141,7 +142,7 @@ function App() {
 
       const response =
         await axios.get(
-          "http://127.0.0.1:8000/graph-data"
+          `${API_BASE_URL}/graph-data`
         );
 
       if (Array.isArray(response.data)) {
@@ -196,7 +197,7 @@ function App() {
       const response =
         await axios.post(
 
-          "http://127.0.0.1:8000/login",
+          `${API_BASE_URL}/login`,
 
           formData
         );
@@ -259,7 +260,7 @@ function App() {
       const response =
         await axios.post(
 
-          "http://127.0.0.1:8000/detect",
+          `${API_BASE_URL}/detect`,
 
           formData
         );
@@ -387,7 +388,7 @@ function App() {
           const response =
             await axios.post(
 
-              "http://127.0.0.1:8000/detect",
+              `${API_BASE_URL}/detect`,
 
               formData
             );
@@ -423,7 +424,7 @@ function App() {
 
       await axios.delete(
 
-        `http://127.0.0.1:8000/delete/${plate}`
+        `${API_BASE_URL}/delete/${plate}`
 
       );
 
@@ -446,7 +447,7 @@ const deleteSelected = async () => {
    for (const id of selectedItems) {
 
   await axios.delete(
-    `http://127.0.0.1:8000/delete/${id}`
+    `${API_BASE_URL}/delete/${id}`
   );
 
 }
@@ -980,7 +981,7 @@ const deleteSelected = async () => {
 
                       <img
 
-                        src={`http://127.0.0.1:8000/${item.image_path}`}
+                        src={getImageUrl(item.image_path)}
 
                         className="history-image"
 

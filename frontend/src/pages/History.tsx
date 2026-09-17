@@ -7,7 +7,7 @@ import { ConfirmDialog } from "../components/ConfirmDialog/ConfirmDialog";
 import { PlateCard } from "../components/PlateCard/PlateCard";
 import { ConfidenceMeter } from "../components/ConfidenceMeter/ConfidenceMeter";
 import { SkeletonLoader } from "../components/Loader/Loader";
-import { checkApiHealth } from "../services/api";
+import { checkApiHealth, getImageUrl } from "../services/api";
 import {
   Search,
   Filter,
@@ -225,8 +225,6 @@ export const History: React.FC = () => {
       </div>
     );
   }
-
-  const API_BASE_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
 
   return (
     <div className="space-y-6">
@@ -465,7 +463,7 @@ export const History: React.FC = () => {
               {/* Media image */}
               <div className="md:w-3/5 aspect-video bg-slate-950 border border-white/5 rounded-xl overflow-hidden shadow-inner">
                 <img
-                  src={`${API_BASE_URL}/${previewItem.image_path}`}
+                  src={getImageUrl(previewItem.image_path)}
                   alt={previewItem.plate_number}
                   className="w-full h-full object-contain"
                 />
@@ -524,7 +522,7 @@ export const History: React.FC = () => {
                 <div className="flex items-center gap-3 pt-4 border-t border-white/5">
                   <StatusChip type="verification" value={previewItem.plate_number} />
                   <a
-                    href={`${API_BASE_URL}/${previewItem.image_path}`}
+                    href={getImageUrl(previewItem.image_path)}
                     download={`plate-${previewItem.plate_number}.jpg`}
                     target="_blank"
                     className="flex-grow flex items-center justify-center gap-1.5 px-4 py-2 bg-brand-primary text-slate-950 font-bold rounded-xl text-xs transition-all hover:shadow-glow-primary"

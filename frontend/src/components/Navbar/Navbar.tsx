@@ -155,7 +155,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onSearchChange, searchValue = ""
                   </p>
                 </div>
                 <div className="text-xs text-slate-400 p-3 leading-relaxed">
-                  Managing PlateVision AI backend server at localhost:8000.
+                  Managing PlateVision AI backend server.
                 </div>
               </motion.div>
             )}

@@ -4,6 +4,7 @@ import { GlassCard } from "../GlassCard/GlassCard";
 import { StatusChip } from "../StatusChip/StatusChip";
 import { ConfidenceMeter } from "../ConfidenceMeter/ConfidenceMeter";
 import { motion } from "framer-motion";
+import { getImageUrl } from "../../services/api";
 
 export interface PlateCardProps {
   id: string;
@@ -39,8 +40,7 @@ export const PlateCard: React.FC<PlateCardProps> = ({
   onDelete,
   onPreview,
 }) => {
-  const API_BASE_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
-  const imageUrl = `${API_BASE_URL}/${imagePath}`;
+  const imageUrl = getImageUrl(imagePath);
 
   const formattedTime = time.includes(".") ? time.split(".")[0] : time;
 

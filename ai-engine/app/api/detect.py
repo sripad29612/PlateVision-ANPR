@@ -55,10 +55,15 @@ ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "admin123")
 # =========================================
 # LOAD YOLO MODEL
 # =========================================
+AI_ENGINE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+MODEL_PATH = os.path.join(AI_ENGINE_DIR, "models", "best.pt")
 
-model = YOLO(
-    "runs/detect/license_plate_model-3/weights/best.pt"
-)
+if not os.path.exists(MODEL_PATH):
+    _fallback = os.path.join(AI_ENGINE_DIR, "runs", "detect", "license_plate_model-3", "weights", "best.pt")
+    if os.path.exists(_fallback):
+        MODEL_PATH = _fallback
+
+model = YOLO(MODEL_PATH)
  
 
 # =========================================

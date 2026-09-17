@@ -51,6 +51,8 @@ lerna-debug.log*
 # AI Models & Datasets
 *.pt
 *.pth
+!ai-engine/models/best.pt
+!models/best.pt
 dataset/
 datasets/
 data/

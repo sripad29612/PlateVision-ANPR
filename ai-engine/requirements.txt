@@ -1,8 +1,9 @@
 fastapi
 uvicorn
 python-multipart
-opencv-python
+opencv-python-headless
 easyocr
 ultralytics
 numpy
 pillow
+pymongo

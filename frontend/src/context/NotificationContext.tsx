@@ -1,5 +1,4 @@
-/* eslint-disable react-refresh/only-export-components */
-import React, { createContext, useContext, useState, useCallback } from "react";
+import { createContext, useContext, useState, useCallback, type FC, type ReactNode } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Toast, type ToastType } from "../components/Toast/Toast";
 
@@ -29,7 +28,7 @@ interface ToastState {
   type: ToastType;
 }
 
-export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const NotificationProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [notifications, setNotifications] = useState<SystemNotification[]>([]);
   const [toasts, setToasts] = useState<ToastState[]>([]);
 

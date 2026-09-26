@@ -1,5 +1,5 @@
-/* eslint-disable react-refresh/only-export-components */
-import React, { createContext, useContext } from "react";
+import { createContext, useContext, useState, useEffect, type FC, type ReactNode } from "react";
+import { authService } from "../services/auth";
 
 interface AuthContextType {
   loggedIn: boolean;
@@ -11,17 +11,53 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const loggedIn = true;
-  const username = "Operator";
-  const loading = false;
+export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
+  const [loggedIn, setLoggedIn] = useState<boolean>(() => {
+    const stored = localStorage.getItem("loggedIn");
+    if (stored === null) {
+      // Default to logged-in as Operator for seamless initial load
+      localStorage.setItem("loggedIn", "true");
+      localStorage.setItem("username", "Operator");
+      return true;
+    }
+    return stored === "true";
+  });
+  const [username, setUsername] = useState<string | null>(() => {
+    return localStorage.getItem("username") || "Operator";
+  });
+  const [loading, setLoading] = useState(false);
 
-  const login = async () => {
-    return { success: true, message: "Logged in" };
+  useEffect(() => {
+    const handleLogout = () => {
+      setLoggedIn(false);
+      setUsername(null);
+    };
+    window.addEventListener("logout", handleLogout);
+    window.addEventListener("unauthorized", handleLogout);
+    return () => {
+      window.removeEventListener("logout", handleLogout);
+      window.removeEventListener("unauthorized", handleLogout);
+    };
+  }, []);
+
+  const login = async (u: string, p: string) => {
+    setLoading(true);
+    try {
+      const res = await authService.login(u, p);
+      if (res.success) {
+        setLoggedIn(true);
+        setUsername(u);
+      }
+      return res;
+    } finally {
+      setLoading(false);
+    }
   };
 
   const logout = () => {
-    // No-op
+    authService.logout();
+    setLoggedIn(false);
+    setUsername(null);
   };
 
   return (

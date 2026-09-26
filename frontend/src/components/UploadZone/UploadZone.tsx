@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import { useCallback, useState, type FC, type DragEvent, type ChangeEvent } from "react";
 import { UploadCloud, FileImage, X } from "lucide-react";
 import { Loader } from "../Loader/Loader";
 
@@ -9,7 +9,7 @@ interface UploadZoneProps {
   onClear: () => void;
 }
 
-export const UploadZone: React.FC<UploadZoneProps> = ({
+export const UploadZone: FC<UploadZoneProps> = ({
   onFileSelect,
   isLoading,
   previewUrl,
@@ -18,7 +18,7 @@ export const UploadZone: React.FC<UploadZoneProps> = ({
   const [isDragActive, setIsDragActive] = useState(false);
   const [fileInfo, setFileInfo] = useState<{ name: string; size: string; type: string } | null>(null);
 
-  const handleDrag = useCallback((e: React.DragEvent) => {
+  const handleDrag = useCallback((e: DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
     if (e.type === "dragenter" || e.type === "dragover") {
@@ -45,7 +45,7 @@ export const UploadZone: React.FC<UploadZoneProps> = ({
     onFileSelect(file);
   }, [onFileSelect]);
 
-  const handleDrop = useCallback((e: React.DragEvent) => {
+  const handleDrop = useCallback((e: DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
     setIsDragActive(false);
@@ -55,7 +55,7 @@ export const UploadZone: React.FC<UploadZoneProps> = ({
     }
   }, [processFile]);
 
-  const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileInput = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       processFile(e.target.files[0]);
     }

@@ -1,4 +1,4 @@
-import React from "react";
+import type { FC } from "react";
 import { Clock, Cpu, Layout, Maximize2 } from "lucide-react";
 import { GlassCard } from "../GlassCard/GlassCard";
 import { ConfidenceMeter } from "../ConfidenceMeter/ConfidenceMeter";
@@ -17,7 +17,7 @@ interface DetectionCardProps {
   boundingBox?: string | [number, number, number, number];
 }
 
-export const DetectionCard: React.FC<DetectionCardProps> = ({
+export const DetectionCard: FC<DetectionCardProps> = ({
   plateNumber,
   time,
   ocrEngine,

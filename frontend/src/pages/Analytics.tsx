@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, type FC } from "react";
 import { historyService, type HistoryItem } from "../services/history";
 import { analyticsService } from "../services/analytics";
 import { checkApiHealth } from "../services/api";
@@ -23,7 +23,7 @@ import {
 import { AlertTriangle, FileBarChart, ShieldCheck, Award } from "lucide-react";
 import { StatsCard } from "../components/StatsCard/StatsCard";
 
-export const Analytics: React.FC = () => {
+export const Analytics: FC = () => {
   const { showToast } = useNotifications();
   const [history, setHistory] = useState<HistoryItem[]>([]);
   const [loading, setLoading] = useState(true);

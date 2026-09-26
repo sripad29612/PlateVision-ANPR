@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { memo, useMemo, useEffect, useState, type FC } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ShieldCheck, ShieldAlert, HelpCircle } from "lucide-react";
 
@@ -8,7 +8,7 @@ interface ConfidenceMeterProps {
   hideIfUnavailable?: boolean;
 }
 
-export const ConfidenceMeter: React.FC<ConfidenceMeterProps> = React.memo(({
+export const ConfidenceMeter: FC<ConfidenceMeterProps> = memo(({
   confidence,
   label = "System Confidence",
   hideIfUnavailable = false,
@@ -17,7 +17,7 @@ export const ConfidenceMeter: React.FC<ConfidenceMeterProps> = React.memo(({
   const [animatedValue, setAnimatedValue] = useState(0);
 
   // Parse raw value
-  const val = React.useMemo(() => {
+  const val = useMemo(() => {
     console.log("ConfidenceMeter Raw Confidence Value:", confidence);
     if (confidence === undefined || confidence === null || isNaN(confidence)) {
       return null;

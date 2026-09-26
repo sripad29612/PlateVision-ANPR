@@ -1,4 +1,4 @@
-import React from "react";
+import type { FC } from "react";
 import { Check, ShieldAlert, Wifi, WifiOff } from "lucide-react";
 
 type ChipType = "camera-status" | "verification" | "ocr-engine";
@@ -8,7 +8,7 @@ interface StatusChipProps {
   value: string; // e.g. "active", "offline", "Verified", "Flagged", "easyocr", "paddleocr"
 }
 
-export const StatusChip: React.FC<StatusChipProps> = ({ type, value }) => {
+export const StatusChip: FC<StatusChipProps> = ({ type, value }) => {
   const normVal = value?.toLowerCase();
 
   if (type === "camera-status") {

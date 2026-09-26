@@ -1,4 +1,4 @@
-import React from "react";
+import type { FC } from "react";
 import { motion } from "framer-motion";
 import { CheckCircle, AlertCircle, Info, X, AlertTriangle } from "lucide-react";
 
@@ -10,7 +10,7 @@ interface ToastProps {
   onClose: () => void;
 }
 
-export const Toast: React.FC<ToastProps> = ({ message, type, onClose }) => {
+export const Toast: FC<ToastProps> = ({ message, type, onClose }) => {
   const getIcon = () => {
     switch (type) {
       case "success":

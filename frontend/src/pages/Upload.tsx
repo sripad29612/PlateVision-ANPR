@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, type FC } from "react";
 import { UploadZone } from "../components/UploadZone/UploadZone";
 import { DetectionCard } from "../components/DetectionCard/DetectionCard";
 import { uploadService, type DetectionResponse } from "../services/upload";
@@ -6,7 +6,7 @@ import { useNotifications } from "../context/NotificationContext";
 import { GlassCard } from "../components/GlassCard/GlassCard";
 import { FileSymlink, Image as ImageIcon, Sparkles, RefreshCw } from "lucide-react";
 
-export const Upload: React.FC = () => {
+export const Upload: FC = () => {
   const { showToast, addNotification } = useNotifications();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string>("");

@@ -1,10 +1,10 @@
-import React from "react";
+import type { FC } from "react";
 import { Link } from "react-router-dom";
 import { AlertCircle, ChevronLeft } from "lucide-react";
 import { motion } from "framer-motion";
 import { GlassCard } from "../components/GlassCard/GlassCard";
 
-export const NotFound: React.FC = () => {
+export const NotFound: FC = () => {
   return (
     <div className="min-h-[80vh] flex flex-col items-center justify-center p-4 text-center max-w-md mx-auto">
       <motion.div

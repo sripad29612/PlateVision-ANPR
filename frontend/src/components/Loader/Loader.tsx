@@ -1,4 +1,4 @@
-import React from "react";
+import type { FC } from "react";
 import { motion } from "framer-motion";
 
 interface LoaderProps {
@@ -6,7 +6,7 @@ interface LoaderProps {
   className?: string;
 }
 
-export const Loader: React.FC<LoaderProps> = ({ size = "md", className = "" }) => {
+export const Loader: FC<LoaderProps> = ({ size = "md", className = "" }) => {
   const dimensions = {
     sm: "w-5 h-5 border-2",
     md: "w-8 h-8 border-[3px]",
@@ -22,7 +22,7 @@ export const Loader: React.FC<LoaderProps> = ({ size = "md", className = "" }) =
   );
 };
 
-export const PageLoader: React.FC = () => {
+export const PageLoader: FC = () => {
   return (
     <div className="fixed inset-0 bg-brand-bg flex flex-col items-center justify-center gap-4 z-50">
       <motion.div
@@ -48,7 +48,7 @@ export const PageLoader: React.FC = () => {
   );
 };
 
-export const SkeletonLoader: React.FC<{ type: "card" | "table" | "chart" }> = ({ type }) => {
+export const SkeletonLoader: FC<{ type: "card" | "table" | "chart" }> = ({ type }) => {
   const animatePulse = "animate-pulse bg-slate-800/40 rounded-xl border border-white/5";
 
   if (type === "card") {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, type FC } from "react";
 import { analyticsService, type DashboardStats, type GraphDataPoint } from "../services/analytics";
 import { historyService, type HistoryItem } from "../services/history";
 import { checkApiHealth } from "../services/api";
@@ -32,7 +32,7 @@ import {
   Cell,
 } from "recharts";
 
-export const Dashboard: React.FC = () => {
+export const Dashboard: FC = () => {
   const { showToast } = useNotifications();
   const [isOffline, setIsOffline] = useState(false);
   const [loading, setLoading] = useState(true);

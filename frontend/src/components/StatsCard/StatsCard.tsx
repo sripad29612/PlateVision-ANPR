@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, type FC } from "react";
 import { GlassCard } from "../GlassCard/GlassCard";
 import { type LucideIcon } from "lucide-react";
 
@@ -14,7 +14,7 @@ interface StatsCardProps {
   glowColor?: "primary" | "accent" | "secondary";
 }
 
-export const StatsCard: React.FC<StatsCardProps> = ({
+export const StatsCard: FC<StatsCardProps> = ({
   title,
   value,
   icon: Icon,

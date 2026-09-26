@@ -1,4 +1,4 @@
-import React from "react";
+import type { FC } from "react";
 import { GlassCard } from "../components/GlassCard/GlassCard";
 import { useTheme } from "../context/ThemeContext";
 import { useNotifications } from "../context/NotificationContext";
@@ -13,7 +13,7 @@ import {
 import { useAuth } from "../context/AuthContext";
 import { API_BASE_URL } from "../services/api";
 
-export const Settings: React.FC = () => {
+export const Settings: FC = () => {
   const { accentColor, setAccentColor } = useTheme();
   const { showToast } = useNotifications();
   const { username } = useAuth();

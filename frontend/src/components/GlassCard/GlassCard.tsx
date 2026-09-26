@@ -1,15 +1,15 @@
-import React from "react";
+import type { FC, ReactNode, MouseEvent } from "react";
 import { motion } from "framer-motion";
 
 interface GlassCardProps {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
   animate?: boolean;
   hoverEffect?: boolean;
-  onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
+  onClick?: (e: MouseEvent<HTMLDivElement>) => void;
 }
 
-export const GlassCard: React.FC<GlassCardProps> = ({
+export const GlassCard: FC<GlassCardProps> = ({
   children,
   className = "",
   animate = true,

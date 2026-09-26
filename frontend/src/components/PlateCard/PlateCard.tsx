@@ -1,4 +1,4 @@
-import React from "react";
+import type { FC, MouseEvent } from "react";
 import { Trash2, Download, Check, Eye } from "lucide-react";
 import { GlassCard } from "../GlassCard/GlassCard";
 import { StatusChip } from "../StatusChip/StatusChip";
@@ -24,7 +24,7 @@ export interface PlateCardProps {
   onPreview?: () => void;
 }
 
-export const PlateCard: React.FC<PlateCardProps> = ({
+export const PlateCard: FC<PlateCardProps> = ({
   plateNumber,
   imagePath,
   time,
@@ -44,7 +44,7 @@ export const PlateCard: React.FC<PlateCardProps> = ({
 
   const formattedTime = time.includes(".") ? time.split(".")[0] : time;
 
-  const handleDownload = (e: React.MouseEvent) => {
+  const handleDownload = (e: MouseEvent) => {
     e.stopPropagation();
     // Fetch and download the image
     const link = document.createElement("a");

@@ -1,17 +1,17 @@
-import React from "react";
+import type { FC, ReactNode } from "react";
 import { GlassCard } from "../GlassCard/GlassCard";
 
 interface ChartCardProps {
   title: string;
   subtitle?: string;
-  children: React.ReactNode;
+  children: ReactNode;
   filterOption?: string;
   onFilterChange?: (opt: string) => void;
   filterOptions?: string[];
   className?: string;
 }
 
-export const ChartCard: React.FC<ChartCardProps> = ({
+export const ChartCard: FC<ChartCardProps> = ({
   title,
   subtitle,
   children,

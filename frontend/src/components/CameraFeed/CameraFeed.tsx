@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import { useRef, useEffect, type FC, type RefObject } from "react";
 import { Camera, CameraOff, Maximize, Play, Square, AlertTriangle, RefreshCw } from "lucide-react";
 import { useNotifications } from "../../context/NotificationContext";
 
@@ -9,10 +9,10 @@ interface CameraFeedProps {
   cameraError?: string | null;
   startCamera: () => Promise<void>;
   stopCamera: () => void;
-  videoRef: React.RefObject<HTMLVideoElement | null>;
+  videoRef: RefObject<HTMLVideoElement | null>;
 }
 
-export const CameraFeed: React.FC<CameraFeedProps> = ({
+export const CameraFeed: FC<CameraFeedProps> = ({
   onCapture,
   isLoading,
   cameraOn,
@@ -38,8 +38,9 @@ export const CameraFeed: React.FC<CameraFeedProps> = ({
     try {
       await startCamera();
       showToast("Surveillance Feed Started", "info");
-    } catch (err: any) {
-      showToast(err.message || "Camera Permission Denied", "error");
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "Camera Permission Denied";
+      showToast(msg, "error");
     }
   };
 

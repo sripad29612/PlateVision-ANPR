@@ -1,4 +1,4 @@
-import React from "react";
+import type { FC } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AlertTriangle, X } from "lucide-react";
 
@@ -12,7 +12,7 @@ interface ConfirmDialogProps {
   onCancel: () => void;
 }
 
-export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
+export const ConfirmDialog: FC<ConfirmDialogProps> = ({
   isOpen,
   title,
   message,

@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import { useState, type FC, type FormEvent } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNotifications } from "../context/NotificationContext";
 import { Loader } from "../components/Loader/Loader";
 import { Eye, EyeOff, Lock, User, ShieldCheck } from "lucide-react";
 import { motion } from "framer-motion";
 
-export const Login: React.FC = () => {
+export const Login: FC = () => {
   const { login } = useAuth();
   const { showToast } = useNotifications();
   
@@ -15,7 +15,7 @@ export const Login: React.FC = () => {
   const [rememberMe, setRememberMe] = useState(() => !!localStorage.getItem("rememberedUsername"));
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!username || !password) {
       showToast("Please provide both username and password credentials.", "warning");

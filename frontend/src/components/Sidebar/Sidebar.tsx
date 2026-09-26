@@ -1,6 +1,7 @@
-import React from "react";
+import type { FC } from "react";
 import { NavLink } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext";
+import { useAuth } from "../../context/AuthContext";
 import {
   LayoutDashboard,
   Upload,
@@ -11,11 +12,13 @@ import {
   ChevronLeft,
   ChevronRight,
   ShieldCheck,
+  LogOut,
 } from "lucide-react";
 import { motion } from "framer-motion";
 
-export const Sidebar: React.FC = () => {
+export const Sidebar: FC = () => {
   const { sidebarCollapsed, setSidebarCollapsed } = useTheme();
+  const { logout } = useAuth();
 
   const menuItems = [
     { name: "Dashboard", path: "/", icon: LayoutDashboard },
@@ -53,6 +56,7 @@ export const Sidebar: React.FC = () => {
         <button
           onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
           className="absolute -right-3 top-1/2 -translate-y-1/2 bg-brand-primary hover:bg-brand-primary/80 text-white rounded-full p-1 border border-white/10 hover:shadow-glow-primary transition-all z-30"
+          title={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
         >
           {sidebarCollapsed ? <ChevronRight className="w-3.5 h-3.5" /> : <ChevronLeft className="w-3.5 h-3.5" />}
         </button>
@@ -92,6 +96,22 @@ export const Sidebar: React.FC = () => {
           </NavLink>
         ))}
       </nav>
+
+      {/* Logout Action */}
+      <div className="px-3 pt-3 border-t border-white/5">
+        <button
+          onClick={logout}
+          className="flex items-center gap-3.5 w-full px-4 py-2.5 rounded-xl text-sm font-medium text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 border border-transparent transition-all group overflow-hidden"
+          title="Sign Out"
+        >
+          <LogOut className="w-5 h-5 flex-shrink-0 group-hover:text-rose-400 transition-colors" />
+          {!sidebarCollapsed && (
+            <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="truncate">
+              Logout
+            </motion.span>
+          )}
+        </button>
+      </div>
     </motion.div>
   );
 };

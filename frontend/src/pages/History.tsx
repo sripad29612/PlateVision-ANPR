@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, type FC } from "react";
 import { historyService, type HistoryItem } from "../services/history";
 import { useNotifications } from "../context/NotificationContext";
 import { GlassCard } from "../components/GlassCard/GlassCard";
@@ -24,7 +24,7 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-export const History: React.FC = () => {
+export const History: FC = () => {
   const { showToast } = useNotifications();
   const [history, setHistory] = useState<HistoryItem[]>([]);
   const [loading, setLoading] = useState(true);

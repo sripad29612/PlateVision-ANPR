@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
-import { Search, Bell, User, Clock, Trash2 } from "lucide-react";
+import { useState, useRef, useEffect, type FC } from "react";
+import { Search, Bell, User, Clock, Trash2, LogOut } from "lucide-react";
 import { useNotifications } from "../../context/NotificationContext";
 import { useAuth } from "../../context/AuthContext";
 import { AnimatePresence, motion } from "framer-motion";
@@ -9,9 +9,9 @@ interface NavbarProps {
   searchValue?: string;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onSearchChange, searchValue = "" }) => {
+export const Navbar: FC<NavbarProps> = ({ onSearchChange, searchValue = "" }) => {
   const { notifications, markAllAsRead, clearAllNotifications } = useNotifications();
-  const { username } = useAuth();
+  const { username, logout } = useAuth();
   const [notifOpen, setNotifOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
 
@@ -34,9 +34,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onSearchChange, searchValue = ""
   }, []);
 
   return (
-    <header className="sticky top-0 right-0 w-full h-16 border-b border-white/5 bg-[#07101f]/60 backdrop-blur-md flex items-center justify-between px-6 z-10">
+    <header className="sticky top-0 right-0 w-full h-16 border-b border-white/5 bg-[#07101f]/60 backdrop-blur-md flex items-center justify-between px-4 sm:px-6 z-10">
       {/* Global Search Bar */}
-      <div className="w-96 relative">
+      <div className="w-48 sm:w-72 md:w-96 relative">
         <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 w-4.5 h-4.5" />
         <input
           type="text"
@@ -154,9 +154,16 @@ export const Navbar: React.FC<NavbarProps> = ({ onSearchChange, searchValue = ""
                     Administrator
                   </p>
                 </div>
-                <div className="text-xs text-slate-400 p-3 leading-relaxed">
+                <div className="text-xs text-slate-400 p-3 leading-relaxed border-b border-white/5 mb-2">
                   Managing PlateVision AI backend server.
                 </div>
+                <button
+                  onClick={logout}
+                  className="w-full flex items-center gap-2 px-3 py-2 text-xs text-rose-400 hover:bg-rose-500/10 rounded-lg transition-colors font-medium text-left"
+                >
+                  <LogOut className="w-3.5 h-3.5" />
+                  <span>Sign Out</span>
+                </button>
               </motion.div>
             )}
           </AnimatePresence>

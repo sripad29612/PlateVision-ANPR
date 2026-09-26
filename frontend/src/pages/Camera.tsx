@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback, type FC } from "react";
 import { CameraFeed } from "../components/CameraFeed/CameraFeed";
 import { DetectionCard } from "../components/DetectionCard/DetectionCard";
 import { uploadService, type DetectionResponse } from "../services/upload";
@@ -19,7 +19,7 @@ interface RecentCameraScan {
   conf?: number | null;
 }
 
-export const Camera: React.FC = () => {
+export const Camera: FC = () => {
   const { showToast, addNotification } = useNotifications();
   const [cameraOn, setCameraOn] = useState(false);
   const [cameraError, setCameraError] = useState<string | null>(null);
@@ -30,7 +30,7 @@ export const Camera: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
 
-  const stopCamera = React.useCallback(() => {
+  const stopCamera = useCallback(() => {
     if (streamRef.current) {
       streamRef.current.getTracks().forEach((track) => track.stop());
       streamRef.current = null;
@@ -41,7 +41,7 @@ export const Camera: React.FC = () => {
     setCameraOn(false);
   }, []);
 
-  const startCamera = React.useCallback(async () => {
+  const startCamera = useCallback(async () => {
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
       const msg = "Camera API (getUserMedia) is not supported or not available in this browser context.";
       setCameraError(msg);
@@ -89,19 +89,21 @@ export const Camera: React.FC = () => {
 
       setCameraOn(true);
       setCameraError(null);
-    } catch (err: any) {
+    } catch (err) {
       console.error("Camera startup error:", err);
       let errorMsg = "Unable to access camera.";
-      if (err.name === "NotAllowedError" || err.name === "PermissionDeniedError") {
-        errorMsg = "Camera permission was denied in your browser. Please allow camera access.";
-      } else if (err.name === "NotFoundError" || err.name === "DevicesNotFoundError") {
-        errorMsg = "No camera hardware detected on this device.";
-      } else if (err.name === "NotReadableError" || err.name === "TrackStartError") {
-        errorMsg = "Camera is currently locked or in use by another application.";
-      } else if (err.name === "OverconstrainedError") {
-        errorMsg = "Requested camera resolution constraints could not be satisfied.";
-      } else if (err.message) {
-        errorMsg = err.message;
+      if (err instanceof DOMException || err instanceof Error) {
+        if (err.name === "NotAllowedError" || err.name === "PermissionDeniedError") {
+          errorMsg = "Camera permission was denied in your browser. Please allow camera access.";
+        } else if (err.name === "NotFoundError" || err.name === "DevicesNotFoundError") {
+          errorMsg = "No camera hardware detected on this device.";
+        } else if (err.name === "NotReadableError" || err.name === "TrackStartError") {
+          errorMsg = "Camera is currently locked or in use by another application.";
+        } else if (err.name === "OverconstrainedError") {
+          errorMsg = "Requested camera resolution constraints could not be satisfied.";
+        } else if (err.message) {
+          errorMsg = err.message;
+        }
       }
       setCameraError(errorMsg);
       setCameraOn(false);
